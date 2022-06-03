@@ -1,4 +1,4 @@
-import {ACTION_TYPE} from "../constant";
+import {ACTION_TYPE} from "../../constant";
 
 class Scenarios extends React.Component {
     onGetAllScenario() {

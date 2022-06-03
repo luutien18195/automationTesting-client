@@ -6,8 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import './index.css';
 import reducers from './redux/reducers';
 import mySaga from './redux/sagas';
-import App from './App';
-
+import App from './app';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, applyMiddleware(sagaMiddleware))

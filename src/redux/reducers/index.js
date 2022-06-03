@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
-import scenarios from './scenarios';
+import scenarios from './scenario-reducer';
 
 export default combineReducers({
     scenarios
