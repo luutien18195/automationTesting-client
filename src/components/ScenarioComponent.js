@@ -1,6 +1,6 @@
 import {ACTION_TYPE} from "../constant";
 
-class ScenarioComponent extends React.Component {
+class Scenarios extends React.Component {
     onGetAllScenario() {
         const {scenarioName, dispatch} = this.props;
         console.log('prop', this.props);
