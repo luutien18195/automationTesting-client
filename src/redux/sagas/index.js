@@ -1,5 +1,6 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
 import * as api from '../../api';
+import {ACTION_TYPE} from '../../constant';
 
 function* fetchScenarioSaga(action) {
     try {
