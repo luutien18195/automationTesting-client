@@ -1,20 +1,19 @@
-import {INIT_STATE} from "../../constant";
-import {getScenarios, getType} from "../actions";
+import {ACTION_TYPE, INIT_STATE} from "../../constant";
 
 export default function scenariosReducers(state = INIT_STATE.scenarios, action) {
     switch(action.type) {
-        case getType(getScenarios.getScenariosRequest):
+        case ACTION_TYPE.SCENARIO.REQUEST:
             return {
                 ...state,
                 isLoading: true
             }
-        case getType(getScenarios.getScenariosSuccess):
+        case ACTION_TYPE.SCENARIO.SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 data: action.payload
             }
-        case getType(getScenarios.getScenariosFailure):
+        case ACTION_TYPE.SCENARIO.RESPONSE:
             return {
                 ...state,
                 isLoading: false

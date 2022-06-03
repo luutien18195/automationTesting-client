@@ -1,14 +1,17 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
-import * as actions from '../actions';
 import * as api from '../../api';
 
 function* fetchScenarioSaga(action) {
-    const scenarios = yield call(api.fetchScenarios);
-    yield put(action.getScenarios.getScenariosSuccess(scenarios))
+    try {
+        const scenarios = yield call(api.fetchScenarios, action.payload.scenarioName);
+        yield put({type: ACTION_TYPE.SCENARIO.SUCCESS, scenarios: scenarios});
+    } catch (e) {
+        yield put({type: ACTION_TYPE.SCENARIO.FAILED, message: e.message});
+    }
 }
 
 function* mySaga() {
-    yield takeLatest(actions.getScenarios.getScenariosRequest, fetchScenarioSaga)
+    yield takeLatest(ACTION_TYPE.SCENARIO.REQUEST, fetchScenarioSaga)
 }
 
 export default mySaga;
