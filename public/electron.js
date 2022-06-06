@@ -19,7 +19,16 @@ function createWindow() {
     ? "http://localhost:3000"
     : `file://${path.join(__dirname, "../build/index.html")}`;
   console.log("loading URL ...", URL);
-  win.loadURL(URL);
+  win.loadFile('public/loading.html')
+  .then(() => {
+    return win.loadURL(URL);
+  })
+  .then(() => {
+    //Open the devtools
+    if (isDev) {
+        win.webContents.openDevTools({mode: "detach"});
+    }
+  });
 
   //Open the devtools
   if (isDev) {
