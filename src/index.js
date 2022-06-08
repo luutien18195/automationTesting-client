@@ -1,11 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./redux/reducers";
 import mySaga from "./redux/sagas";
-import App from "./app";
+import App from "./App";
 
 import "./index.css";
 import "./assets/css/animate.min.css";
@@ -17,9 +17,10 @@ const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(mySaga);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-);
+const rootNode = document.getElementById('root');
+ReactDOM.render(<App />, rootNode);
+// root.render(
+//   <Provider store={store}>
+//     <App />
+//   </Provider>
+// );
