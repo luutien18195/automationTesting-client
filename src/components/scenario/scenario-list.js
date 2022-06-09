@@ -1,134 +1,117 @@
-import {ACTION_TYPE} from "../../constant";
-import React from "react";
+import { ACTION_TYPE } from "../../constant";
+import React, { useState, useEffect } from "react";
 import {
-  Table,
-  Form,
-  Tooltip,
-  Button,
-  OverlayTrigger,
-  Pagination,
+  Table
 } from "react-bootstrap";
+import { fetchScenarios } from "../../api";
+import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
+import ReactPaginate from "react-paginate";
 
-//mock data
-import datas from "../../_mock/scenarios";
-
-class Scenarios extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.recordsPerPage = 2;
-    this.activePage = 1;
-    this.paginationItems = [];
-    this.scenarioList = [];
-    // Get all scenario by default condition
-    this.onSearchAllScenario();
-
-    this.onLoadPagination();
+const columns = [
+  {
+    dataField: "name",
+    text: "Name",
+    sort: true
+  },
+  {
+    dataField: "title",
+    text: "Title",
+    sort: true
+  },
+  {
+    dataField: "description",
+    text: "Description"
+  },
+  {
+    dataField: "createdTime",
+    text: "Created Time"
+  },
+  {
+    dataField: "updatedTime",
+    text: "LastUpdated"
+  },
+  {
+    dataField: "action",
+    text: "Action"
   }
+];
 
-  onSearchAllScenario() {
-    // const {scenarioName, dispatch} = this.props;
-    // console.log("prop", this.props);
-    // dispatchEvent({
-    //   type: ACTION_TYPE.SCENARIO.REQUEST,
-    //   payload: {scenarioName},
-    // });
 
-    //mock data
-    console.log("activePage", this.activePage);
-    this.totalRecords = datas.totalRecords;
-    console.log("totalRecords", this.totalRecords);
-    let currentRecordIndex = (this.activePage - 1) * this.recordsPerPage;
-    this.scenarioList = datas.scenarios.slice(
-      currentRecordIndex,
-      currentRecordIndex + 1 + this.recordsPerPage
-    );
-    console.log("listScenarios", this.scenarioList);
-  }
+function Scenarios() {
+  let limit = 3;
+  const [scenarioList, setScenarioList] = useState([]);
+  const [pageCount, setpageCount] = useState(0);
+  useEffect(() => {
+    const getScenarios = async () => {
+      const res = await fetchScenarios({ page: 1, size: limit })
+      setpageCount(Math.ceil((res.data.totalCount / limit) - 1));
+      setScenarioList(res.data.scenarios);
+    };
 
-  onLoadPagination() {
-    for (let i = 1; i <= this.totalRecords / this.recordsPerPage; i++) {
-      this.paginationItems.push(
-        <Pagination.Item
-          key={i}
-          active={i === this.activePage}
-          onClick={() => this.onChangePage(i)}>
-          {i}
-        </Pagination.Item>
-      );
-    }
-  }
+    getScenarios();
+  }, [limit]);
 
-  onChangePage(pageNumber) {
-    console.log("onChangePage event\nPage Number", pageNumber);
-    this.activePage = parseInt(pageNumber);
-    this.onSearchAllScenario();
-    console.log("label", this.paginationItems[this.activePage]);
-  }
+  const fetchScenarioList = async (currentPage) => {
+    const res = await fetchScenarios({ page: currentPage, size: limit })
+    return res;
+  };
 
-  render() {
-    return (
-      <>
-        <Table striped bordered hover responsive size='sm'>
-          <thead>
-            <tr>
-              <th>
-                <Form.Check
-                  role='button'
-                  defaultValue=''
-                  type='checkbox'></Form.Check>
-                <span className='form-check-sign'></span>
-              </th>
-              <th>Name</th>
-              <th>Function</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>CreateTime</th>
-              <th>UpdateTime</th>
-              <th>Action</th>
+  const handlePageClick = async (data) => {
+    let currentPage = data.selected + 1;
+    const res = await fetchScenarioList(currentPage);
+    setScenarioList(res.data.scenarios);
+  };
+  return (
+    <>
+      <Table responsive>
+        <thead>
+          <tr>
+            <th>#</th>
+            {Array.from(columns.map((e, i) => (<th key={i}>{e.text}</th>)))}
+          </tr>
+        </thead>
+        <tbody>
+          {scenarioList.map((e, i) => (
+            <tr key={i}>
+              <td><FormCheckInput></FormCheckInput></td>
+              <td>{e.name}</td>
+              <td>{e.title}</td>
+              <td>{e.description}</td>
+              <td>{e.createTime}</td>
+              <td>{e.updateTime}</td>
+              <td>
+                <div>
+                  <span className="d-block mr-3"><i className="fas fa-edit"></i></span>
+                  <i className="fa-solid fa-trash-can"></i>
+                </div>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {this.scenarioList.map((data) => (
-              <tr key={data._id}>
-                <td>
-                  <Form.Check
-                    role='button'
-                    defaultValue=''
-                    type='checkbox'></Form.Check>
-                </td>
-                <td>{data.name}</td>
-                <td>{data.function}</td>
-                <td>{data.title}</td>
-                <td>{data.description}</td>
-                <td>{data.createTime}</td>
-                <td>{data.updateTime}</td>
-                <td className='text-center'>
-                  <OverlayTrigger
-                    overlay={
-                      <Tooltip id='tooltip-160575228'>Edit Scenario</Tooltip>
-                    }>
-                    <Button
-                      className='btn-simple p-1'
-                      type='button'
-                      variant='outline-primary'>
-                      <i className='fas fa-edit'></i>
-                    </Button>
-                  </OverlayTrigger>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-
-        <div className='container'>
-          <div className='row justify-content-end'>
-            <Pagination className='col'>{this.paginationItems}</Pagination>
-          </div>
-        </div>
-      </>
-    );
-  }
+          ))}
+        </tbody>
+      </Table>
+      <div>
+        <ReactPaginate
+          previousLabel={"Prev"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={3}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination justify-content-center"}
+          pageClassName={"page-item"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-item"}
+          previousLinkClassName={"page-link"}
+          nextClassName={"page-item"}
+          nextLinkClassName={"page-link"}
+          breakClassName={"page-item"}
+          breakLinkClassName={"page-link"}
+          activeClassName={"active"}
+        ></ReactPaginate>
+      </div>
+    </>
+  );
 }
 
 export default Scenarios;
