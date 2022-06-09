@@ -37,7 +37,7 @@ const columns = [
 ];
 
 
-function Scenarios() {
+function ScenarioList() {
   let limit = 3;
   const [scenarioList, setScenarioList] = useState([]);
   const [pageCount, setpageCount] = useState(0);
@@ -114,4 +114,4 @@ function Scenarios() {
   );
 }
 
-export default Scenarios;
+export default ScenarioList;

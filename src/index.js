@@ -5,11 +5,10 @@ import {createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./redux/reducers";
 import mySaga from "./redux/sagas";
-import App from "./App";
+import App from "./app";
 
 import "./index.css";
 import "./assets/css/animate.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const sagaMiddleware = createSagaMiddleware();
