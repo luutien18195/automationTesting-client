@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 import {createStore, applyMiddleware} from "redux";
 import createSagaMiddleware from "redux-saga";
 import reducers from "./redux/reducers";
@@ -16,8 +17,13 @@ const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(mySaga);
 
-const rootNode = document.getElementById('root');
-ReactDOM.render(<App />, rootNode);
+const rootNode = document.getElementById("root");
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  rootNode
+);
 // root.render(
 //   <Provider store={store}>
 //     <App />

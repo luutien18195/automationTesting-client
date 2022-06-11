@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import 'react-pro-sidebar/dist/css/styles.css';
-
+import React from "react";
+import {Routes, Route} from "react-router-dom";
+import "react-pro-sidebar/dist/css/styles.css";
 import Dashboard from "../components/dashboard/dashboard";
-import Scenario from "../components/scenario/scenario";
+import Scenarios from "../components/scenario/scenarios";
+import Settings from "../components/settings/settings";
+import ErrorPage from "../pages/404";
 
-
-export default function Container() {
-
+export default function MContainer() {
   return (
     <>
-      <div className="w-80 d-inline-block ml-3">
-        <Scenario></Scenario>
+      <div className='absolute-min-width-500 d-inline-block mt-3 ml-3 overflow-auto'>
+        <Routes>
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/scenarios' element={<Scenarios />} />
+          <Route path='/settings' element={<Settings />} />
+          <Route path='/error' element={<ErrorPage />} />
+          <Route path='/*' element={<ErrorPage />} />
+        </Routes>
       </div>
     </>
   );

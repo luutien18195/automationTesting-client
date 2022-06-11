@@ -23,13 +23,25 @@ code {
 .w-90 {
   width: 90%;
 }
-
+.w-82 {
+  width:82%;
+}
 .w-80 {
   width: 80%;
+}
+.w-17 {
+  width: 17%;
 }
 
 .max-w-90 {
   max-width: 90%;
+}
+
+.absolute-min-width-500 {
+  min-width: 500px;
+}
+.absolute-min-width-270 {
+  min-width: 270px;
 }
 
 /*Cursor*/
@@ -66,3 +78,8 @@ code {
 #root {
   height: 100vh;
 }
+
+
+/* Sidebar */
+/* Navbar */
+/* Container */
