@@ -11,6 +11,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<HomePage />}>
+          <Route path='/' element={<Dashboard />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/scenarios' element={<Scenarios />} />
           <Route path='/settings' element={<Settings />} />
