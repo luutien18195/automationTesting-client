@@ -38,9 +38,7 @@ code {
   max-width: 90%;
 }
 
-.absolute-min-width-500 {
-  min-width: 500px;
-}
+
 .absolute-min-width-225 {
   min-width: 225px;
 }
@@ -103,3 +101,9 @@ a.dropdown-item:active {
 }
 
 /* Container */
+.root-container {
+  min-width: 500px;
+  min-height: 700px;
+  display:inline-block;
+  overflow:auto
+}

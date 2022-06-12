@@ -6,8 +6,8 @@ const isDev = require("electron-is-dev");
 function createWindow() {
   // Create the browser window
   const win = new BrowserWindow({
-    width: 1000,
-    height: 800,
+    width: 1200,
+    height: 850,
     webPreferences: {
       nodeIntegration: true,
     },
@@ -19,16 +19,17 @@ function createWindow() {
     ? "http://localhost:3000"
     : `file://${path.join(__dirname, "../build/index.html")}`;
   console.log("loading URL ...", URL);
-  win.loadFile('public/loading.html')
-  .then(() => {
-    return win.loadURL(URL);
-  })
-  .then(() => {
-    //Open the devtools
-    if (isDev) {
+  win
+    .loadFile("public/loading.html")
+    .then(() => {
+      return win.loadURL(URL);
+    })
+    .then(() => {
+      //Open the devtools
+      if (isDev) {
         win.webContents.openDevTools({mode: "detach"});
-    }
-  });
+      }
+    });
 
   //Open the devtools
   if (isDev) {

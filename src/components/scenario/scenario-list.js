@@ -66,7 +66,15 @@ function ScenarioList() {
             <th>
               <FormCheckInput className='cursor-pointer' />
             </th>
-            {Array.from(columns.map((e, i) => <th key={i}>{e.text}</th>))}
+            {Array.from(
+              columns.map((e, i) => (
+                <th
+                  key={i}
+                  className={i === columns.length - 1 ? "text-center" : ""}>
+                  {e.text}
+                </th>
+              ))
+            )}
           </tr>
         </thead>
         <tbody>
@@ -81,10 +89,8 @@ function ScenarioList() {
               <td>{e.createTime}</td>
               <td>{e.updateTime}</td>
               <td>
-                <div>
-                  <span className='d-block mr-3'>
-                    <i className='fas fa-edit'></i>
-                  </span>
+                <div className='d-flex justify-content-center'>
+                  <i className='fas fa-edit fs-12'></i>
                   <i className='fa-solid fa-trash-can'></i>
                 </div>
               </td>

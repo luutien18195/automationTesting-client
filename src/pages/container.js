@@ -5,7 +5,7 @@ import "react-pro-sidebar/dist/css/styles.css";
 export default function RootContainer() {
   return (
     <>
-      <div className='absolute-min-width-500 d-inline-block mt-3 ml-3 mr-3 overflow-auto'>
+      <div className='root-container mt-3 ml-3 mr-3 p-3 shadow-lg'>
         <Outlet />
       </div>
     </>
