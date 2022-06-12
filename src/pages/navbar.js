@@ -5,6 +5,10 @@ import Container from "react-bootstrap/Container";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 export default function RootNavbar() {
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    window.location.reload();
+  }
   return (
     <>
       <Navbar
@@ -27,7 +31,7 @@ export default function RootNavbar() {
                     />
                   </div>
                 }>
-                <NavDropdown.Item href='#'>Logout</NavDropdown.Item>
+                <NavDropdown.Item href='#' onClick={handleLogout}>Logout</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href='#'>Profile</NavDropdown.Item>
                 <NavDropdown.Item href='#'>Action 1</NavDropdown.Item>
