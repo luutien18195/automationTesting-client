@@ -15,14 +15,13 @@ export default function RootNavbar() {
           <Navbar.Brand href='#'>Navbar</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className='justify-content-end'>
-            <Navbar.Text>
+            <Navbar.Text className='p-0'>
               <NavDropdown
                 title={
                   <div className='d-inline-block'>
                     <span className='d-inline-block mr-2'>Tiến Lưu</span>
                     <Image
                       roundedCircle
-                      responsive
                       src='static\images\avatars\default-avatar-shiba-inu.jpg'
                       width='45px'
                     />

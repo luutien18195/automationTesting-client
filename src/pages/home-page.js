@@ -7,7 +7,7 @@ import RootNavbar from "./navbar";
 export default function HomePage() {
   return (
     <>
-      <Sidebar hide={false} class='float-start w-17 absolute-min-width-270' />
+      <Sidebar hide={true} class='float-start w-17 absolute-min-width-225' />
       <div className='d-flex flex-column w-100'>
         <RootNavbar />
         <RootContainer />

@@ -40,8 +40,8 @@ code {
 .absolute-min-width-500 {
   min-width: 500px;
 }
-.absolute-min-width-270 {
-  min-width: 270px;
+.absolute-min-width-225 {
+  min-width: 225px;
 }
 
 /*Cursor*/
@@ -85,12 +85,23 @@ code {
 
 /* Sidebar */
 /* Navbar */
-.navbar a:hover, .nav-link:hover,
-.navbar a, .nav-link {
+
+.navbar a,
+.nav-link {
    color: #fff
+}
+
+a.dropdown-item:hover,
+.navbar a:hover,
+.nav-link a:hover,
+.nav-link:focus {
+  color:rgb(225, 225, 225);
 }
 a.dropdown-item,
 a.dropdown-item:hover {
   color: #000;
+}
+a.dropdown-item:active {
+  color: #fff;
 }
 /* Container */

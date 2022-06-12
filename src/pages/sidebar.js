@@ -16,7 +16,6 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
-import Dashboard from "../components/dashboard/dashboard";
 
 export default function Sidebar(props) {
   const [hide, setHide] = useState(props.hide);
@@ -28,15 +27,21 @@ export default function Sidebar(props) {
     <>
       <ProSidebar collapsed={hide} className={props.class}>
         <SidebarHeader className={hide ? "p-3 d-flex" : "p-3"}>
-          <div className='float-start pt-1' hidden={hide}>
-            <Image roundedCircle responsive src='favicon.ico' />
+          <div
+            className={
+              hide
+                ? "float-start pt-1"
+                : "float-start pt-2 d-flex align-items-center"
+            }
+            hidden={hide}>
+            <Image roundedCircle src='favicon.ico' width='30px' />
             <span className='fs-5 ml-1'>Dr.Autotest</span>
           </div>
           <span
             className={
               hide
                 ? "text-center cursor-pointer d-inline-block float-end w-100 fs-5"
-                : "text-center cursor-pointer d-inline-block float-end pt-2 fs-3"
+                : "text-center cursor-pointer d-inline-block float-end fs-3"
             }
             onClick={toggleShow}>
             <FaList />
