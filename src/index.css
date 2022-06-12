@@ -48,6 +48,9 @@ code {
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-none {
+  cursor: none
+}
 
 /*Margin*/
 .mr-1 {
@@ -82,4 +85,12 @@ code {
 
 /* Sidebar */
 /* Navbar */
+.navbar a:hover, .nav-link:hover,
+.navbar a, .nav-link {
+   color: #fff
+}
+a.dropdown-item,
+a.dropdown-item:hover {
+  color: #000;
+}
 /* Container */

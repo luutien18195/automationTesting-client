@@ -28,9 +28,6 @@ export default function Sidebar(props) {
     <>
       <ProSidebar collapsed={hide} className={props.class}>
         <SidebarHeader className={hide ? "p-3 d-flex" : "p-3"}>
-          {/* <Image roundedCircle responsive 
-                src="static\images\avatars\default-avatar-shiba-inu.jpg"
-                sizes="40px"/> */}
           <div className='float-start pt-1' hidden={hide}>
             <Image roundedCircle responsive src='favicon.ico' />
             <span className='fs-5 ml-1'>Dr.Autotest</span>

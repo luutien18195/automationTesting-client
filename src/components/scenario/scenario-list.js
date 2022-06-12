@@ -60,7 +60,7 @@ function ScenarioList() {
   };
   return (
     <>
-      <Table responsive>
+      <Table striped responsive hover>
         <thead>
           <tr>
             <th>#</th>
@@ -69,7 +69,7 @@ function ScenarioList() {
         </thead>
         <tbody>
           {scenarioList.map((e, i) => (
-            <tr key={i}>
+            <tr key={i} className='cursor-pointer'>
               <td>
                 <FormCheckInput></FormCheckInput>
               </td>
