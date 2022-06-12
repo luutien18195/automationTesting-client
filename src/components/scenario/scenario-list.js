@@ -35,7 +35,7 @@ const columns = [
 ];
 
 function ScenarioList() {
-  let limit = 3;
+  let limit = 5;
   const [scenarioList, setScenarioList] = useState([]);
   const [pageCount, setpageCount] = useState(0);
   useEffect(() => {
@@ -63,7 +63,9 @@ function ScenarioList() {
       <Table striped responsive hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th>
+              <FormCheckInput className='cursor-pointer' />
+            </th>
             {Array.from(columns.map((e, i) => <th key={i}>{e.text}</th>))}
           </tr>
         </thead>
@@ -71,7 +73,7 @@ function ScenarioList() {
           {scenarioList.map((e, i) => (
             <tr key={i} className='cursor-pointer'>
               <td>
-                <FormCheckInput></FormCheckInput>
+                <FormCheckInput className='cursor-pointer' />
               </td>
               <td>{e.name}</td>
               <td>{e.title}</td>
