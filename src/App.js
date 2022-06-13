@@ -12,13 +12,17 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path='/' element={<HomePage />} />
+        <Route exact path='/' element={<HomePage />} >
+          <Route exact path='/' element={<Scenarios />} />
+          <Route exact path='/dashboard' element={<Dashboard />} />
+          <Route exact path='/scenarios' element={<Scenarios />} />
+          <Route exact path='/settings' element={<Settings />} />
+          <Route exact path='/error' element={<ErrorPage />} />
+        </Route>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path='/dashboard' element={<Dashboard />} />
-        <Route exact path='/scenarios' element={<Scenarios />} />
-        <Route exact path='/settings' element={<Settings />} />
         <Route path='/*' element={<ErrorPage />} />
+        
         <Route exact path='/error' element={<ErrorPage />} />
       </Routes>
     </>
