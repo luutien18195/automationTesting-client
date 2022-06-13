@@ -4,9 +4,11 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { register } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
+import { Navigate } from "react-router-dom";
 const Register = () => {
   const [successful, setSuccessful] = useState(false);
   const { message } = useSelector((state) => state.message);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(clearMessage());
@@ -44,6 +46,7 @@ const Register = () => {
       .unwrap()
       .then(() => {
         setSuccessful(true);
+        window.location.reload();
       })
       .catch(() => {
         setSuccessful(false);
@@ -52,11 +55,6 @@ const Register = () => {
   return (
     <div className="col-md-12 signup-form">
       <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

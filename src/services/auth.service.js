@@ -2,7 +2,7 @@ import axios from "axios";
 import { URL } from "../api/index";
 
 const register = (username, email, password) => {
-    return axios.post(`${URL}/signup`, {
+    return axios.post(`${URL}/api/auth/signup`, {
         username,
         email,
         password
