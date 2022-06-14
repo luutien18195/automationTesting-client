@@ -30,19 +30,10 @@ code {
 .w-80 {
   width: 80%;
 }
-.w-17 {
-  width: 17%;
-}
 
 .max-w-90 {
   max-width: 90%;
 }
-
-
-.absolute-min-width-225 {
-  min-width: 225px;
-}
-
 /*Cursor*/
 .cursor-pointer {
   cursor: pointer;
@@ -82,6 +73,13 @@ code {
 }
 
 /* Sidebar */
+.root-sidebar {
+  width: 17%;
+  min-width: 225px;
+  height: 100%;
+  min-height: 800px;
+}
+
 /* Navbar */
 .navbar a,
 .nav-link {
