@@ -2,9 +2,13 @@ import {ACTION_TYPE} from "../../constant";
 import React, {useState, useEffect} from "react";
 import {Table} from "react-bootstrap";
 import {fetchScenarios} from "../../api";
+import ScenarioToolBar from "./scenario-toolbar";
 import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
 import ReactPaginate from "react-paginate";
 
+const EMPTY_STR = "";
+const PAGE_DEFAULT = 1;
+const RECORDS_LIMIT_PER_PAGE = 5;
 const columns = [
   {
     dataField: "name",
@@ -34,34 +38,62 @@ const columns = [
   },
 ];
 
-function ScenarioList() {
-  let limit = 5;
+function ScenarioList(props) {
   const [scenarioList, setScenarioList] = useState([]);
   const [pageCount, setpageCount] = useState(0);
+  let searchParams = {
+    page: PAGE_DEFAULT,
+    size: RECORDS_LIMIT_PER_PAGE,
+    name: EMPTY_STR,
+    title: EMPTY_STR,
+  };
+
   useEffect(() => {
     const getScenarios = async () => {
-      const res = await fetchScenarios({page: 1, size: limit});
-      setpageCount(Math.ceil(res.data.totalCount / limit - 1));
+      const res = await fetchScenarios(searchParams);
+      setpageCount(Math.ceil(res.data.totalCount / RECORDS_LIMIT_PER_PAGE - 1));
       setScenarioList(res.data.scenarios);
     };
 
     getScenarios();
-  }, [limit]);
-
-  const fetchScenarioList = async (currentPage) => {
-    const res = await fetchScenarios({page: currentPage, size: limit});
-    return res;
-  };
+  }, [RECORDS_LIMIT_PER_PAGE]);
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected + 1;
-    const res = await fetchScenarioList(currentPage);
+    handleEventData({
+      ...searchParams,
+      page: currentPage,
+    });
+    const res = await fetchScenarios(searchParams);
     setScenarioList(res.data.scenarios);
   };
+
+  const handleSearch = async (data) => {
+    handleEventData({
+      ...searchParams,
+      page: PAGE_DEFAULT,
+      name: data.name,
+      title: data.title,
+    });
+    const res = await fetchScenarios(searchParams);
+    setpageCount(Math.ceil(res.data.totalCount / RECORDS_LIMIT_PER_PAGE - 1));
+    setScenarioList(res.data.scenarios);
+  };
+
+  const handleEventData = (data) => {
+    searchParams = {
+      ...searchParams,
+      page: data.page,
+      name: data.name,
+      title: data.title,
+    };
+  };
+
   return (
     <>
+      <ScenarioToolBar onSearch={handleSearch} onDataChange={handleEventData} />
       <Table striped responsive hover>
-        <thead>
+        <thead className='table-light'>
           <tr>
             <th>
               <FormCheckInput className='cursor-pointer' />
