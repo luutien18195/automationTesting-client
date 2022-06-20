@@ -7,7 +7,7 @@ import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
 import ReactPaginate from "react-paginate";
 
 const EMPTY_STR = "";
-const PAGE_DEFAULT = 1;
+const PAGE_DEFAULT = 0;
 const RECORDS_LIMIT_PER_PAGE = 5;
 const columns = [
   {
@@ -51,7 +51,7 @@ function ScenarioList(props) {
   useEffect(() => {
     const getScenarios = async () => {
       const res = await fetchScenarios(searchParams);
-      setpageCount(Math.ceil(res.data.totalCount / RECORDS_LIMIT_PER_PAGE - 1));
+      setpageCount(Math.ceil(res.data.totalCount / (RECORDS_LIMIT_PER_PAGE - 1)));
       setScenarioList(res.data.scenarios);
     };
 
@@ -59,7 +59,7 @@ function ScenarioList(props) {
   }, [RECORDS_LIMIT_PER_PAGE]);
 
   const handlePageClick = async (data) => {
-    let currentPage = data.selected + 1;
+    let currentPage = data.selected;
     handleEventData({
       ...searchParams,
       page: currentPage,
@@ -76,7 +76,7 @@ function ScenarioList(props) {
       title: data.title,
     });
     const res = await fetchScenarios(searchParams);
-    setpageCount(Math.ceil(res.data.totalCount / RECORDS_LIMIT_PER_PAGE - 1));
+    setpageCount(Math.ceil(res.data.totalCount / (RECORDS_LIMIT_PER_PAGE - 1)));
     setScenarioList(res.data.scenarios);
   };
 
